@@ -1,9 +1,9 @@
-package com.sample.cashblock.offerwall.temp.cashblock_roulette_flutter1
+package com.sample.temp.cashblock_roulette_flutter1
 
 import android.util.Log
 import com.avatye.cashblock.CashBlockSDK
-import com.avatye.cashblock.base.component.domain.entity.user.GenderType
-import com.avatye.cashblock.base.component.domain.entity.user.Profile
+import com.avatye.cashblock.base.component.entity.user.Profile
+import com.avatye.cashblock.business.model.specify.GenderType
 import com.avatye.cashblock.feature.roulette.CashBlockRoulette
 import com.avatye.cashblock.feature.roulette.component.model.listener.ITicketCount
 import io.flutter.embedding.android.FlutterActivity
@@ -36,7 +36,7 @@ class MainActivity : FlutterActivity() {
                         setUserProfile(userId = userId)
                     }
                     "cashBlock_start" -> {
-                        launchOfferwall()
+                        launchRoulette()
                     }
                     "cashBlock_roulette_ticket_condition" -> {
                         result.success(getTicketCondition())
@@ -69,8 +69,8 @@ class MainActivity : FlutterActivity() {
 
 
     /** 캐시블록 - 룰렛 시작  */
-    private fun launchOfferwall() {
-        Log.e("Core@Block", "MainActivity -> launchOfferwall")
+    private fun launchRoulette() {
+        Log.e("Core@Block", "MainActivity -> launchRoulette")
         CashBlockRoulette.launch(context = this)
     }
 

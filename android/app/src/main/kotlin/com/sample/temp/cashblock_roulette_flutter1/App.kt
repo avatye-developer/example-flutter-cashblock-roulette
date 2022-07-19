@@ -1,4 +1,4 @@
-package com.sample.cashblock.offerwall.temp.cashblock_roulette_flutter1
+package com.sample.temp.cashblock_roulette_flutter1
 
 import android.app.Application
 import com.avatye.cashblock.CashBlockSDK

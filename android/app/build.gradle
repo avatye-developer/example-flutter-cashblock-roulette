@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -44,19 +44,17 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.sample.cashblock.offerwall.temp.cashblock_roulette_flutter1"
+        applicationId "com.sample.temp.cashblock_roulette_flutter1"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion 23
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -76,16 +74,16 @@ dependencies {
      * 통합버전 (Universal)
      * 캐시블록에서 제공하는 모든 모듈이 포함됩니다.
      */
-    // implementation 'org.bitbucket.avatye.sdk-cash-block:block-universal:version'
+     // implementation 'org.bitbucket.avatye.sdk-cash-block:block-universal:1.0.12'
 
     /**
      * 오퍼월@캐시블록
      */
-    // implementation 'org.bitbucket.avatye.sdk-cash-block:block-offerwall:version'
+    // implementation 'org.bitbucket.avatye.sdk-cash-block:block-offerwall:1.0.12'
 
     /**
      * 룰렛@캐시블록
      */
-    implementation 'org.bitbucket.avatye.sdk-cash-block:block-roulette:1.0.6'
+    implementation 'org.bitbucket.avatye.sdk-cash-block:block-roulette:1.0.12'
 
 }
