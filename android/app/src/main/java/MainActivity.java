@@ -31,7 +31,7 @@ public class MainActivity extends FlutterActivity {
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
 
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), "")
+        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), METHOD_CHANNEL)
                 .setMethodCallHandler(new MethodChannel.MethodCallHandler() {
                     @Override
                     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
