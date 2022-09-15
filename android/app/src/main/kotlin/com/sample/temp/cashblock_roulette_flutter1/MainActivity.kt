@@ -13,11 +13,11 @@ import io.flutter.plugin.common.MethodChannel
 /**
  * 캐시블록의 “룰렛”을 실행하기 위해서는 “초기화 및 기본설정”이 완료 되어야 합니다.
 
- * SDK 초기화 → 세션연동 → 유저 정보 연동 → 룰렛 실행
- * application -> CashBlockSDK.initialize()
- * Main activity -> CashBlockSDK.sessionStart(), CashBlockSDK.sessionEnd()
- * profile -> CashBlockSDK.setUserProfile()
- * launch
+ * SDK 초기화 → 유저 정보 연동 → 세션연동 → 룰렛 실행
+ * 1. SDK 초기화       : CashBlockSDK.initialize()                               : Application
+ * 2. 유저 정보 연동   : CashBlockSDK.setUserProfile()                           : MainActivity
+ * 3. 세션연동        :  CashBlockSDK.sessionStart(), CashBlockSDK.sessionEnd()  : MainActivity
+ * 4. 룰렛실행        :  CashBlockRoulette.launch                                : MainActivity
  */
 class MainActivity : FlutterActivity() {
     companion object {
@@ -34,6 +34,7 @@ class MainActivity : FlutterActivity() {
                     "cashBlock_init" -> {
                         val userId: String = call.arguments.toString()
                         setUserProfile(userId = userId)
+                        startBlockSession()
                     }
                     "cashBlock_start" -> {
                         launchRoulette()
@@ -46,14 +47,7 @@ class MainActivity : FlutterActivity() {
     }
 
 
-    /** 캐시블록 - 세션 시작 */
-    private fun startBlockSession() {
-        Log.e("Core@Block", "MainActivity -> startBlockSession")
-        CashBlockSDK.sessionStart(context = this)
-    }
-
-
-    /** 사용자 프로필을 등록 (필수) */
+    /** 유저 정보 연동 (필수) */
     private fun setUserProfile(userId: String) {
         CashBlockSDK.setUserProfile(
             context = this,
@@ -68,7 +62,14 @@ class MainActivity : FlutterActivity() {
     }
 
 
-    /** 캐시블록 - 룰렛 시작  */
+    /** 세션 시작 */
+    private fun startBlockSession() {
+        Log.e("Core@Block", "MainActivity -> startBlockSession")
+        CashBlockSDK.sessionStart(context = this)
+    }
+
+
+    /** 룰렛 시작  */
     private fun launchRoulette() {
         Log.e("Core@Block", "MainActivity -> launchRoulette")
         CashBlockRoulette.launch(context = this)
@@ -76,7 +77,7 @@ class MainActivity : FlutterActivity() {
 
 
     /**
-     * 캐시블록 - 룰렛 티켓 조회
+     * 룰렛 티켓 조회
      * balance : 보유수량
      * condition: 받을 수 있는 개수
      * */
@@ -94,7 +95,7 @@ class MainActivity : FlutterActivity() {
 
 
     /**
-     * 캐시블록 - 세션 종료
+     * 세션 종료
      * 메인 액티비티의 'onDestroy()' 함수에 적용
      */
     override fun onDestroy() {
